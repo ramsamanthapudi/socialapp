@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'accounts/basic.html' %}
+{% load bootstrap3 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CHeru</title>
+</head>
+<body>
+    {% block y %}
+    <form method="post">
+        {%csrf_token%}
+        {# {{ form.as_p }} #}
+        {% bootstrap_form form %}
+        <input type="submit" name="submit" value="submit">
+    </form>
+    {% endblock %}
+</body>
+</html>
