@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'posts/post_base.html' %}
+{% block content%}
+<h3>Are you sure to delete the post?</h3>
+<div>
+    {% include'posts/_post.html' with post=object hide_delete=True %}
 
-</body>
-</html>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="submit" name="submit">
+    <a href="{% url 'posts:detail' username=user.username pk=post.pk %}">Back</a>
+</form>
+{% endblock %}

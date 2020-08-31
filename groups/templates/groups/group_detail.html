@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'groups/group_base.html' %}
 
-</body>
-</html>
+{% block pregroup %}
+<h1>{{group.name}}</h1>
+<h2>Users {{ group.members.count }}</h2>
+
+
+
+
+{% endblock %}
+
+{% block groupcontent %}
+<div >
+
+        {% for posts in group.groupposts.all %}
+            {% include 'posts/_post.html'%}
+        {% endfor %}
+
+</div>
+{% endblock %}

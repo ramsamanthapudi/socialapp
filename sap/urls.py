@@ -18,10 +18,14 @@ from django.urls import path, include
 from accounts import urls as us
 from accounts import views
 from django.conf import settings
-from django.conf.urls import static
+from django.conf.urls.static import static
+from groups import urls as us1
+from posts import urls as us2
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include(us)),
     path('thanks/', views.logoutview.as_view(), name='thanks'),
+    path('groups/',include(us1)),
+    path('posts/',include(us2))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

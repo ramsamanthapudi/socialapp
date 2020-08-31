@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'bootstrap3',
+    'posts',
+    'groups',
 
 ]
 
@@ -132,5 +134,5 @@ LOGIN_REDIRECT_URL='accounts:diksoochi'
 LOGOUT_REDIRECT_URL='thanks'
 
 #MEDIA Settings
-MEDIA_ROOT = os.path.join(BASE_DIR,'MEDIA')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'

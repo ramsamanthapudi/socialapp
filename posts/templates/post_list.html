@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'posts/post_base.html' %}
 
-</body>
-</html>
+{% block precontent %}
+<div>
+    {% if request.user.is_authenticated %}
+    <div>
+        <div class="content">
+            <h5>Your Groups</h5>
+            <ul>
+                {% for groupmember in get_user_groups %}
+                    <li>
+                        <a href="{% url 'groups:detail' slug=groupmember.group.slug %}"></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+    {% endif %}
+
+    <div>
+        <div>
+            <h5>All Groups</h5>
+            <ul>
+                {% for other_group in get_other_groups %}
+                <li>
+                    <a href="{% url 'groups:detail' slug=other_group.slug %}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postcontent %}
+    {% for post in post_list %}
+        {% include 'posts/_post.html' %}
+    {% endfor %}
+{% endblock %}
