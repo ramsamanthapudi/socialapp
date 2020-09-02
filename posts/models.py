@@ -16,7 +16,7 @@ class Post(models.Model):
         return self.message
 
     def get_absolute_url(self):
-        return reverse('posts:single', kwargs={'username': self.user.username, 'pk': self.pk})
+        return reverse('posts:detail', kwargs={'username': self.user.username, 'pk': self.pk})
 
     class Meta:
         ordering = ['-created_time']

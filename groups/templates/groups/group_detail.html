@@ -4,7 +4,13 @@
 <h1>{{group.name}}</h1>
 <h2>Users {{ group.members.count }}</h2>
 
-
+ <div class="content">
+     {% if user in group.members.all %}
+     <a href="{% url 'groups:leave' pk=group.pk%}"><span class="glphicon glyphicon-remove-circle"></span>Leave</a>
+     {% else %}
+     <a href="{% url 'groups:join' pk=group.pk%}"><span class="glphicon glphicon-ok-circle"></span>Join</a>
+     {% endif %}
+ </div>
 
 
 {% endblock %}
@@ -12,7 +18,7 @@
 {% block groupcontent %}
 <div >
 
-        {% for posts in group.groupposts.all %}
+        {% for post in group.groupposts.all %}
             {% include 'posts/_post.html'%}
         {% endfor %}
 

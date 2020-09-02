@@ -1,10 +1,10 @@
 {% extends 'posts/post_base.html' %}
 {% block content%}
 <h3>Are you sure to delete the post?</h3>
-<div>
-    {% include'posts/_post.html' with post=object hide_delete=True %}
+<!--<div>-->
+<!--   {# {% include 'posts/_post.html' with post=object hide_delete=True %} #}-->
 
-</div>
+<!--</div>-->
 
 <form method="post">
     {% csrf_token %}

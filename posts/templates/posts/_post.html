@@ -1,0 +1,18 @@
+<div> <!-- no need to extend or include html as this is included in another html -->
+    <h3>{{post.message}}</h3>
+    <div>
+
+        <h5>
+            <a href="{% url 'posts:for_user' username=post.user.username %}">UserPosts</a>
+
+            <time>
+                <a href="{%url 'posts:detail' username=post.user.username pk=post.pk %}">PostDetails</a>
+            </time>
+        </h5>
+        <div >
+            {% if user.is_authenticated  %} {# and post.user==user #}
+                <a href="{% url 'posts:delete' pk=post.pk %}">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

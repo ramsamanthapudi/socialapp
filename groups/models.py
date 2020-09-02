@@ -16,6 +16,9 @@ class Group(models.Model):
     def get_absolute_url(self):
         return reverse('groups:detail',kwargs={'pk':self.pk})
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         ordering=['name']
 
@@ -37,10 +40,3 @@ class GroupMember(models.Model):
 #     {% else %}
 #     {% endif %}
 
-# <!--<div class="content">-->
-# <!--    {% if user in group.members.all %}-->
-# <!--    <a href="{% url 'groups:leave' %}"><span class="glphicon glyphicon-remove-circle"></span>Leave</a>-->
-# <!--    {% else %}-->
-# <!--    <a href="{% url 'groups:join' %}"><span class="glphicon glphicon-ok-circle"></span>Join</a>-->
-# <!--    {% endif %}-->
-# <!--</div>-->

@@ -4,7 +4,7 @@
     <div class="col-md-4">
         <div class="container">
             {% if user.is_authenticated %}
-                <h1> Welcome Back <a href="{% url 'posts:for_user' username=user.username %}">@{{user.username}}</a></h1>
+                <h4> Welcome Back <a href="{% url 'posts:for_user' username=user.username %}">@{{user.username}}</a> </h4>
             {% endif %}
             <h2>Groups</h2>
             <h5>Welcome to the groups page</h5>
@@ -18,15 +18,17 @@
 {% block groupcontent %}
     <div class="col-md-4">
         <div class="list-group">
-            {% for group in grouplist %}
-                <a class="list-group-item" href="{% url 'groups:single' %}">
+
+            {% for group in group_list %}
+                 <p>Namasthe</p>
+                <a class="list-group-item" href="{% url 'groups:detail' pk=group.pk %}">
                     <h3 class="title list-group-item-heading">{{group.name}}</h3>
                     <div class="row">
                         <div class="col-md-4">
-                            <span class="badge">{{group.members.count}}</span>
+                            <span class="badge">Members count: {{group.members.count}}</span>
                         </div>
                         <div class="col-md-4">
-                            <span class="badge">{{group.posts.count}}</span>
+                            <span class="badge">Posts Count : {{group.groupposts.count}} </span>
                         </div>
                     </div>
                 </a>
