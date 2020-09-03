@@ -18,11 +18,12 @@ class GroupList(ListView):
     model = Group
 
 class JoinGroup(LoginRequiredMixin,RedirectView):
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse('groups:detail', pk=self.pk) #kwargs={'pk':self.kwargs.get('pk')}
+    login_url = 'accounts:login'
+    def get_redirect_url(self,  *args, **kwargs):
+        return reverse('groups:detail',kwargs={'pk':self.kwargs.get('pk')} ) #pk=self.args.pk
 
-    def get(self, request, *args, **kwargs):
-        group = get_object_or_404(Group,pk=self.pk) # kwargs={'pk':self.kwargs.get('pk')}
+    def get(self, request,pk,*args,**kwargs):
+        group = get_object_or_404(Group,pk=pk) # kwargs={'pk':self.kwargs.get('pk')}
 
         try:
             GroupMember.objects.create(user=self.request.user,group=group)
@@ -34,18 +35,22 @@ class JoinGroup(LoginRequiredMixin,RedirectView):
         return super().get(request, *args, **kwargs)
 
 class LeaveGroup(LoginRequiredMixin,RedirectView):
+    login_url= 'accounts:login'
+    def get_redirect_url(self,  *args, **kwargs):
+        return reverse('groups:detail',kwargs={'pk':self.kwargs.get('pk')} )
 
-    def get(self, request, *args, **kwargs):
-        group = get_object_or_404(Group,kwargs={'pk':self.pk})
+    def get(self, request,pk, *args, **kwargs):
+        group = get_object_or_404(Group,pk=pk)
 
         try:
             membership = GroupMember.objects.filter(
-                user= self.request.user#,
+                user= self.request.user,
                 #group__slug=self.kwargs.get('slug')
+                group__pk = self.kwargs.get('pk')
             ).get()
         except:
             messages.warning(self.request, 'You are not in this group')
         else:
             membership.delete()
             messages.success(self.request,'You left the group successfully')
-        return super().get(request,*self,**kwargs)
+        return super().get(request,*args,**kwargs)
